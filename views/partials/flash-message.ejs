@@ -1,0 +1,18 @@
+<!-- Flash messages -->
+<% if (successMsg||errorMsg) { %>
+  <div class="row mt-3 mb-3">
+    <!-- Success message -->
+    <div class="col-md-12 m-auto <%= successMsg ? "" : "d-none" %>">
+      <div id="success" class="alert alert-success">
+        <%= successMsg ? successMsg : '' %>
+      </div>
+    </div>
+  
+    <!-- Error message -->
+    <div class="col-md-12 m-auto <%= errorMsg ? "" : "d-none" %>">
+      <div id="error" class="alert alert-danger">
+        <%= errorMsg ? errorMsg : '' %>
+      </div>
+    </div>
+  </div>
+<% } %>
