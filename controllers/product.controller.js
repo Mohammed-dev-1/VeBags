@@ -89,7 +89,7 @@ const getBySlug = async (req, res, next) => {
       errorMsg,
       current: page,
       breadcrumbs: req.breadcrumbs,
-      home: "/products/" + req.params.slug.toString() + "/?",
+      home: `/products/${req.params.slug.toString()}/?`,
       pages: Math.ceil(count / perPage),
     });
   } catch (error) {

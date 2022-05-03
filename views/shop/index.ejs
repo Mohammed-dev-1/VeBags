@@ -3,6 +3,7 @@
 <div class="container-fluid">
   <!-- Flash messages -->
   <%- include ../partials/flash-message %>
+  
   <!-- Breadcrumbs -->
   <div class="row mt-2">
     <div class="col-md-12 m-auto">
@@ -19,69 +20,73 @@
       <%} %>
     </div>
   </div>
-  <!-- Page banner image -->
 
+  <!-- Page banner image -->
   <% if(pageName == 'All Products') { %>
-  <div class="text-center hero-container">
-    <img
-      class="d-block w-100 hero-image"
-      src="/images/banner-all-products.jpg"
-    />
-    <div class="hero-text">
-      <h1><%=pageName%></h1>
+    <div class="text-center hero-container">
+      <img
+        class="d-block w-100 hero-image"
+        src="/images/banner-all-products.jpg"
+      />
+      <div class="hero-text">
+        <h1><%=pageName%></h1>
+      </div>
     </div>
-  </div>
-  <%} else {%> <%categories.forEach( category => {%> <%if(pageName ==
-  category.title){%>
-  <div class="text-center hero-container">
-    <img
-      class="d-block w-100 hero-image"
-      src="/images/banner-<%=category.slug%>.jpg"
-    />
-    <div class="hero-text">
-      <h1><%=pageName%></h1>
-    </div>
-  </div>
-  <%}%> <%})%> <%}%>
+  <%} else {%> 
+    <%categories.forEach( category => {%> 
+      <%if(pageName == category.title){%>
+        <div class="text-center hero-container">
+          <img
+            class="d-block w-100 hero-image"
+            src="/images/banner-<%=category.slug%>.jpg"
+          />
+          <div class="hero-text">
+            <h1><%=pageName%></h1>
+          </div>
+        </div>
+      <%}%> 
+    <%})%> 
+  <%}%>
 
   <hr class="gradient-style" />
+ 
   <!-- Contents -->
   <div class="row pl-4 pr-4">
     <% products.forEach((product) => { %>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-index-box">
-      <div class="single-product d-flex flex-column h-100">
-        <a
-          class="title-link"
-          href="/products/<%=product.category.slug%>/<%=product._id%>"
-        >
-          <img src="<%= product.imagePath %>" alt="Bag" class="img-fluid"
-        /></a>
-        <div class="product-info">
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-index-box">
+        <div class="single-product d-flex flex-column h-100">
           <a
             class="title-link"
             href="/products/<%=product.category.slug%>/<%=product._id%>"
           >
-            <h6 class="mt-2 mb-2"><%= product.title %></h6></a
+            <img src="<%= product.imagePath %>" alt="Bag" class="img-fluid"
+          /></a>
+          <div class="product-info">
+            <a
+              class="title-link"
+              href="/products/<%=product.category.slug%>/<%=product._id%>"
+            >
+              <h6 class="mt-2 mb-2"><%= product.title %></h6></a
+            >
+            <div class="price">$<%= product.price %></div>
+          </div>
+          <% if(product.available) {%>
+          <a
+            href="/cart/add-to-cart/<%=product._id%>"
+            class="btn btn-block btn-secondary button-style mt-auto mb-2"
           >
-          <div class="price">$<%= product.price %></div>
+            Add to Shopping Cart
+          </a>
+          <% } else { %>
+          <a
+            href="#"
+            class="btn btn-block btn-danger button-style-danger mt-2 mb-2"
+          >
+            Sold out
+          </a>
+          <%} %>
         </div>
-        <% if(product.available) {%>
-        <a
-          href="/cart/add-to-cart/<%=product._id%>"
-          class="btn btn-block btn-secondary button-style mt-auto mb-2"
-        >
-          Add to Shopping Cart
-        </a>
-        <% } else { %>
-        <a
-          href="#"
-          class="btn btn-block btn-danger button-style-danger mt-2 mb-2"
-        >
-          Sold out
-        </a>
-        <%} %>
       </div>
-    </div>
     <% }) %>
   </div>
 
